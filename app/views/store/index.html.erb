@@ -1,7 +1,16 @@
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    Categories
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
 <% @categories.each do |category| %>
-  <%= link_to category.title, category_path(category) %>
+    <li><%= link_to category.title, category_path(category) %></li>
+<% end %>
+</ul>
+</div>
+
+<% @items.available_items.each do |item| %>
+  <p><%= item.title %> | $<%= item.price.to_f/100 %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) unless current_user.nil? %>
 <% end %>
 
-<% @items.each do |item| %>
-  <p><%= item.title %> | <%= number_to_currency(item.price) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
-<% end %>
